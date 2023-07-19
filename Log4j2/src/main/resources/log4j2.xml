@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="OFF">
+    <Properties>
+        <Property name="log-path">/Users/aligenis/IdeaProjects/Log4j2/logs</Property>
+        <Property name="log-project-name">sample</Property>
+        <Property name="log-pattern">%d %p %c{1.} [%t] %m%n</Property>
+        <Property name="rollover-strategy-max">1</Property>
+        <Property name="rolling-size-based">1 MB</Property>
+        <Property name="date">%d{ISO8601} %-5p</Property>
+        <Property name="level">trace</Property>
+    </Properties>
+    <appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <pattern>${log-pattern}</pattern>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="ALL" fileName="${log-path}/%d-%i.log" filePattern="${log-path}/%d-%i.log">
+            <PatternLayout>
+                <pattern>${log-pattern}</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${rolling-size-based}" />
+            </Policies>
+            <DefaultRolloverStrategy max="${rollover-strategy-max}"/>
+        </RollingFile>
+    </appenders>
+    <Loggers>
+        <logger name="MyTimerLoggings" level="${level}" additivity="false">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="ALL" level="${level}"/>
+        </logger>
+    </Loggers>
+</configuration>
