@@ -19,7 +19,10 @@ public class MyTimerLoggings {
                     logger.info(time.toString());
                 }
             }
-            logger.debug(time.toString());
+            else{
+                logger.debug(time.toString());
+            }
+
             Thread.sleep(1000);
         }
     }
